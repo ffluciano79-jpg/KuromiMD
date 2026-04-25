@@ -1,27 +1,41 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!DOCTYPE html><html lang="pt-br">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yoru Bot</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
-
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
-}
+<title>Yoru Bot Ultra</title><link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;600&display=swap" rel="stylesheet"><style>
+*{margin:0;padding:0;box-sizing:border-box}
 
 body{
-  background:#05050a;
-  color:white;
+  font-family:'Poppins',sans-serif;
+  background:#020204;
+  color:#fff;
   overflow-x:hidden;
 }
 
-/* BACKGROUND ANIMADO */
+/* LOADER */
+#loader{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+
+.loader-text{
+  font-family:'Orbitron';
+  font-size:2rem;
+  color:#ff0055;
+  animation:blink 1s infinite;
+}
+
+@keyframes blink{
+  0%,100%{opacity:1}
+  50%{opacity:.2}
+}
+
 canvas{
   position:fixed;
   top:0;
@@ -29,28 +43,21 @@ canvas{
   z-index:-1;
 }
 
-/* NAVBAR */
 nav{
   position:fixed;
   width:100%;
   padding:15px 40px;
   display:flex;
   justify-content:space-between;
-  backdrop-filter:blur(10px);
+  backdrop-filter:blur(15px);
   background:rgba(0,0,0,0.4);
 }
 
 nav h2{
   color:#ff0055;
+  font-family:'Orbitron';
 }
 
-nav a{
-  color:white;
-  text-decoration:none;
-  margin-left:20px;
-}
-
-/* HERO */
 .hero{
   height:100vh;
   display:flex;
@@ -61,20 +68,15 @@ nav a{
 }
 
 .hero h1{
-  font-size:3.5rem;
+  font-size:4rem;
   background:linear-gradient(90deg,#ff0055,#ff66aa);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
 
-.hero p{
-  opacity:.7;
-  margin:15px;
-}
-
 .btn{
-  padding:12px 25px;
-  border-radius:30px;
+  padding:14px 30px;
+  border-radius:40px;
   border:none;
   background:#ff0055;
   color:white;
@@ -85,157 +87,112 @@ nav a{
 
 .btn:hover{
   transform:scale(1.1);
-  box-shadow:0 0 20px #ff0055;
+  box-shadow:0 0 25px #ff0055;
 }
 
-/* CARDS */
 .section{
-  padding:80px 20px;
+  padding:100px 20px;
   text-align:center;
 }
 
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-  max-width:1000px;
+  gap:25px;
+  max-width:1100px;
   margin:auto;
 }
 
 .card{
   background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(10px);
-  padding:25px;
-  border-radius:15px;
-  transition:.3s;
+  backdrop-filter:blur(15px);
+  padding:30px;
+  border-radius:20px;
   border:1px solid rgba(255,0,100,0.2);
+  transition:.4s;
 }
 
 .card:hover{
-  transform:translateY(-10px);
-  box-shadow:0 0 30px rgba(255,0,100,0.3);
+  transform:translateY(-15px);
+  box-shadow:0 0 40px rgba(255,0,100,0.4);
 }
 
-/* STATUS */
 .status{
-  font-size:1.5rem;
+  font-size:1.8rem;
   color:#00ff88;
-  animation:pulse 1.5s infinite;
+  animation:pulse 1.2s infinite;
 }
 
 @keyframes pulse{
   0%{opacity:1}
-  50%{opacity:.4}
+  50%{opacity:.3}
   100%{opacity:1}
 }
 
-/* FOOTER */
 footer{
   padding:30px;
   text-align:center;
   opacity:.6;
 }
-</style>
-</head>
-
-<body>
-
-<canvas id="bg"></canvas>
+</style></head><body><div id="loader">
+  <div class="loader-text">Carregando Yoru...</div>
+</div><canvas id="bg"></canvas>
 
 <nav>
-  <h2>Yoru</h2>
-  <div>
-    <a href="#">Início</a>
-    <a href="#features">Funções</a>
-    <a href="#status">Status</a>
+  <h2>Yoru Ultra</h2>
+</nav><section class="hero">
+  <h1>Yoru Bot</h1>
+  <p>O sistema mais avançado de automação WhatsApp</p><button class="btn" onclick="playMusic()">🎵 Música</button> <button class="btn" onclick="window.open('https://wa.me/558481625194')">🚀 Usar Bot</button>
+
+</section><section class="section">
+  <h2>🔥 Recursos Premium</h2>  <div class="grid">
+    <div class="card">Anti-link inteligente</div>
+    <div class="card">Sistema anti-bot automático</div>
+    <div class="card">Registro de usuários</div>
+    <div class="card">Download de mídias</div>
+    <div class="card">IA integrada</div>
+    <div class="card">Controle total de grupos</div>
   </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <h1>🤖 Yoru Bot</h1>
-  <p>Automação avançada • Segurança • Diversão</p>
-
-  <div>
-    <button class="btn" onclick="playMusic()">🎵 Música</button>
-    <button class="btn" onclick="window.open('https://wa.me/558481625194')">🚀 Usar Bot</button>
-  </div>
-</section>
-
-<!-- FEATURES -->
-<section class="section" id="features">
-  <h2>⚡ Funções do Bot</h2>
-
-  <div class="grid">
-    <div class="card">
-      <h3>🛡️ Segurança</h3>
-      <p>Anti-link, anti-mídia, anti-bot e proteção total para grupos.</p>
-    </div>
-
-    <div class="card">
-      <h3>🎮 Diversão</h3>
-      <p>Comandos como casal, jogos e interações automáticas.</p>
-    </div>
-
-    <div class="card">
-      <h3>🤖 Inteligência</h3>
-      <p>Respostas automáticas, IA e comandos inteligentes.</p>
-    </div>
-
-    <div class="card">
-      <h3>📥 Downloads</h3>
-      <p>Baixa vídeos, músicas e conteúdo direto no WhatsApp.</p>
-    </div>
-
-    <div class="card">
-      <h3>⚙️ Sistema Avançado</h3>
-      <p>Registro de usuários, comandos personalizados e APIs.</p>
-    </div>
-
-    <div class="card">
-      <h3>📊 Controle Total</h3>
-      <p>Administração completa com comandos exclusivos.</p>
-    </div>
-  </div>
-</section>
-
-<!-- STATUS -->
-<section class="section" id="status">
+</section><section class="section">
   <h2>📊 Status</h2>
-  <p class="status">Online • 99.9% uptime</p>
-</section>
-
-<footer>
-  © 2026 - Yoru Bot • Gerado pela Yoru
-</footer>
-
-<!-- AUDIO -->
-<audio id="music" loop>
+  <p class="status" id="status">Conectando...</p>
+</section><footer>
+  © 2026 - Yoru Ultra System
+</footer><audio id="music" loop>
   <source src="https://raw.githubusercontent.com/dylanModz/uploads/main/midias/audios/527eu4coi.mp3">
-</audio>
+</audio><script>
+// loader
+window.onload = () => {
+  setTimeout(()=>{
+    document.getElementById('loader').style.display='none'
+  },1500)
+}
 
-<script>
-// MUSICA
+// musica
 let music = document.getElementById("music")
 function playMusic(){
   music.paused ? music.play() : music.pause()
 }
 
-// PARTICULAS MELHORADAS
+// status fake
+setInterval(()=>{
+  document.getElementById("status").innerText = "Online • " + (99.5 + Math.random()).toFixed(2) + "% uptime"
+},2000)
+
+// particulas avançadas
 let canvas = document.getElementById("bg")
 let ctx = canvas.getContext("2d")
-
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
 let particles = []
 
-for(let i=0;i<120;i++){
+for(let i=0;i<150;i++){
   particles.push({
     x:Math.random()*canvas.width,
     y:Math.random()*canvas.height,
-    size:Math.random()*3,
-    speed:Math.random()*1.5
+    size:Math.random()*2,
+    speed:Math.random()*2
   })
 }
 
@@ -254,7 +211,5 @@ function animate(){
 }
 
 animate()
-</script>
-
-</body>
+</script></body>
 </html>
