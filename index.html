@@ -188,6 +188,18 @@ body{
  to{width:100%}
 }
 
+#visualizer{
+ position:fixed;
+ inset:0;
+ z-index:0;
+ opacity:0.6;
+}
+
+.container{
+ position:relative;
+ z-index:1;
+}
+
 </style>
 </head>
 
@@ -319,7 +331,57 @@ window.onload=()=>{
   setTimeout(()=>{load.style.display="none"},600)
  },2500)
 }
+
+/* VISUALIZER DE MÚSICA */
+let audioCtx = new (window.AudioContext || window.webkitAudioContext)()
+let analyser = audioCtx.createAnalyser()
+let source = audioCtx.createMediaElementSource(music)
+
+source.connect(analyser)
+analyser.connect(audioCtx.destination)
+
+analyser.fftSize = 128
+let bufferLength = analyser.frequencyBinCount
+let dataArray = new Uint8Array(bufferLength)
+
+let canvas = document.getElementById("visualizer")
+let ctx = canvas.getContext("2d")
+
+canvas.width = window.innerWidth
+canvas.height = window.innerHeight
+
+function drawVisualizer(){
+ requestAnimationFrame(drawVisualizer)
+
+ analyser.getByteFrequencyData(dataArray)
+
+ ctx.clearRect(0,0,canvas.width,canvas.height)
+
+ let barWidth = canvas.width / bufferLength
+
+ for(let i=0;i<bufferLength;i++){
+  let barHeight = dataArray[i]
+
+  let x = i * barWidth
+  let y = canvas.height - barHeight
+
+  ctx.fillStyle = getComputedStyle(document.documentElement)
+   .getPropertyValue('--main-color')
+
+  ctx.fillRect(x,y,barWidth-2,barHeight)
+ }
+}
+
+drawVisualizer()
+
+/* GARANTE QUE TOQUE NO CELULAR */
+document.addEventListener("click",()=>{
+ audioCtx.resume()
+})
+
 </script>
+
+<canvas id="visualizer"></canvas>
 
 </body>
 </html>
