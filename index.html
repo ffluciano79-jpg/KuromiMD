@@ -10,20 +10,26 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
-/* VARS INTELIGENTES */
 :root{
  --main-color:#ff4d88;
- --text-color:#ffffff;
+ --text-color:#fff;
  --card-bg:rgba(255,255,255,0.04);
  --soft-bg:rgba(255,255,255,0.05);
 }
 
+/* ANIMAÇÃO PREMIUM */
 body{
  font-family:'Inter',sans-serif;
  background:#040406;
  color:var(--text-color);
  overflow-x:hidden;
- transition:.3s;
+ transition:all .4s ease;
+ animation:fadeIn .6s ease;
+}
+
+@keyframes fadeIn{
+ from{opacity:0;transform:scale(.97)}
+ to{opacity:1;transform:scale(1)}
 }
 
 /* LOADING */
@@ -32,18 +38,6 @@ body{
  display:flex;align-items:center;justify-content:center;
  z-index:9999;transition:.5s;
 }
-.loader-box{
- width:90%;max-width:320px;padding:30px 20px;
- border-radius:30px;background:rgba(255,255,255,0.03);
- backdrop-filter:blur(20px);text-align:center;
-}
-.loader-img{width:90px;height:90px;margin:auto;border-radius:20px;overflow:hidden;animation:spin 3s infinite}
-.loader-img img{width:100%;height:100%;object-fit:cover;}
-@keyframes spin{0%{transform:rotateY(0)}100%{transform:rotateY(360deg)}}
-
-.loader-bar{height:6px;background:#222;border-radius:10px;margin-top:10px;overflow:hidden}
-.loader-progress{height:100%;width:0;background:var(--main-color);animation:load 3s forwards}
-@keyframes load{to{width:100%}}
 
 /* MENU */
 .menu-btn{
@@ -51,106 +45,89 @@ body{
  background:#111;padding:10px 14px;border-radius:12px;
  cursor:pointer;z-index:10;
 }
+
 .menu{
  position:fixed;top:0;right:-270px;width:270px;height:100%;
- background:#0a0a0f;padding:20px;transition:.3s;
+ background:#0a0a0f;padding:20px;transition:.4s;
  display:flex;flex-direction:column;gap:15px;z-index:10;
 }
 .menu.active{right:0;}
 
-.menu-slider{
- width:100%;appearance:none;height:6px;
- background:#222;border-radius:10px;outline:none;
+/* PALETA */
+.palette{
+ display:flex;flex-wrap:wrap;gap:10px;
 }
-.menu-slider::-webkit-slider-thumb{
- appearance:none;width:14px;height:14px;
- border-radius:50%;background:var(--main-color);
- cursor:pointer;box-shadow:0 0 10px var(--main-color);
+.color{
+ width:30px;height:30px;border-radius:50%;
+ cursor:pointer;border:2px solid transparent;
+ transition:.3s;
 }
-
-/* BACKGROUND */
-.neon{
- position:fixed;width:15px;height:15px;border-radius:50%;
- pointer-events:none;
- background:var(--main-color);
- box-shadow:0 0 20px var(--main-color),0 0 40px var(--main-color);
- z-index:999;
-}
-canvas{position:fixed;inset:0;z-index:0;}
+.color:hover{transform:scale(1.2)}
+.color.active{border:2px solid #fff}
 
 /* MAIN */
-.container{max-width:850px;margin:80px auto;padding:20px;position:relative;z-index:1;}
-
+.container{max-width:850px;margin:80px auto;padding:20px;}
 .main{
  background:var(--card-bg);
  backdrop-filter:blur(20px);
  border-radius:30px;padding:40px 25px;
- border:1px solid rgba(255,255,255,0.06);
  text-align:center;
+ transition:.4s;
 }
 
 .logo{
  font-family:'Orbitron';
  color:var(--main-color);
- text-shadow:0 0 10px var(--main-color);
+ text-shadow:0 0 15px var(--main-color);
 }
 
 .time{
  background:var(--soft-bg);
- padding:8px 14px;
- border-radius:20px;
+ padding:8px 14px;border-radius:20px;
 }
 
 .avatar{
  width:100px;height:100px;border-radius:50%;
  margin:20px auto;
  box-shadow:0 0 30px var(--main-color);
- animation:float 4s ease-in-out infinite;
+ animation:float 4s infinite;
 }
 
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes float{
+ 0%,100%{transform:translateY(0)}
+ 50%{transform:translateY(-10px)}
+}
 
 .btn{
  margin-top:20px;width:100%;padding:18px;
  border-radius:18px;border:none;
  background:var(--main-color);
- color:#fff;
- font-weight:600;
+ color:#fff;font-weight:600;
  cursor:pointer;
- transition:.2s;
+ transition:.3s;
 }
 
-.btn:hover{filter:brightness(1.2);}
+.btn:hover{
+ transform:scale(1.03);
+ filter:brightness(1.2);
+}
 </style>
 </head>
 
 <body>
-
-<div id="loading">
- <div class="loader-box">
-  <div class="loader-img">
-   <img src="https://i.ibb.co/6RCGNGD4/bf962842325b.jpg">
-  </div>
-  <h2>YORU SYSTEM</h2>
-  <p>By Lucianz</p>
-  <div class="loader-bar"><div class="loader-progress"></div></div>
- </div>
-</div>
 
 <div class="menu-btn" onclick="toggleMenu()">⋮</div>
 
 <div class="menu" id="menu">
 <button onclick="toggleMenu()">← Voltar</button>
 
-<h3>Cor do Tema</h3>
-<input type="color" onchange="setColor(this.value)">
+<h3>Escolher Tema</h3>
+
+<div class="palette" id="palette"></div>
 
 <h3>Volume</h3>
-<input type="range" min="0" max="1" step="0.01" class="menu-slider" oninput="setVolume(this.value)">
+<input type="range" min="0" max="1" step="0.01" oninput="setVolume(this.value)">
 </div>
-
-<canvas id="particles"></canvas>
-<div class="neon" id="neon"></div>
 
 <div class="container">
 <div class="main">
@@ -162,7 +139,7 @@ canvas{position:fixed;inset:0;z-index:0;}
 
 <img class="avatar" src="https://i.ibb.co/6RCGNGD4/bf962842325b.jpg">
 
-<h1>Yoru Uma Bot Feita Pra Grupo</h1>
+<h1>Yoru Sistema Inteligente</h1>
 
 <button class="btn" onclick="toggleMusic()">Play / Pause</button>
 
@@ -180,89 +157,68 @@ Falar com o Dono
 <audio id="music"></audio>
 
 <script>
-setInterval(()=>{
- let d=new Date()
- document.getElementById("time").innerText=
- d.getHours()+":"+String(d.getMinutes()).padStart(2,'0')
-},1000)
+/* TEMA DO SISTEMA */
+function detectTheme(){
+ if(window.matchMedia('(prefers-color-scheme: light)').matches){
+  document.documentElement.style.setProperty('--card-bg','rgba(0,0,0,0.6)')
+  document.documentElement.style.setProperty('--text-color','#000')
+ }else{
+  document.documentElement.style.setProperty('--card-bg','rgba(255,255,255,0.04)')
+  document.documentElement.style.setProperty('--text-color','#fff')
+ }
+}
 
+/* CORES PERMITIDAS (SEM BRANCO, PRETO, AMARELO) */
+let colors=[
+ "#ff4d88","#6c5cff","#00c2ff","#00ffb3",
+ "#ff3c3c","#9d4edd","#00b4d8","#2ec4b6"
+]
+
+let palette=document.getElementById("palette")
+
+colors.forEach(c=>{
+ let el=document.createElement("div")
+ el.className="color"
+ el.style.background=c
+ el.onclick=()=>setColor(c,el)
+ palette.appendChild(el)
+})
+
+function setColor(c,el){
+ document.documentElement.style.setProperty('--main-color',c)
+ localStorage.setItem("yoru_color",c)
+
+ document.querySelectorAll('.color').forEach(e=>e.classList.remove('active'))
+ el.classList.add('active')
+}
+
+/* SALVAR COR */
+let saved=localStorage.getItem("yoru_color")
+if(saved){
+ document.documentElement.style.setProperty('--main-color',saved)
+}
+
+/* PLAYER */
 let music=document.getElementById("music")
 music.src="https://raw.githubusercontent.com/dylanModz/uploads/main/midias/audios/527eu4coi.mp3"
 
 function toggleMusic(){music.paused?music.play():music.pause()}
 function setVolume(v){music.volume=v}
 
+/* MENU */
 function toggleMenu(){
  document.getElementById("menu").classList.toggle("active")
 }
 
-/* COR INTELIGENTE REAL */
-function setColor(c){
- document.documentElement.style.setProperty('--main-color',c)
+/* RELÓGIO */
+setInterval(()=>{
+ let d=new Date()
+ document.getElementById("time").innerText=
+ d.getHours()+":"+String(d.getMinutes()).padStart(2,'0')
+},1000)
 
- let r=parseInt(c.substr(1,2),16)
- let g=parseInt(c.substr(3,2),16)
- let b=parseInt(c.substr(5,2),16)
-
- let brightness=(r*299+g*587+b*114)/1000
-
- if(brightness > 180){
-  document.documentElement.style.setProperty('--text-color','#000')
-  document.documentElement.style.setProperty('--card-bg','rgba(0,0,0,0.65)')
-  document.documentElement.style.setProperty('--soft-bg','rgba(0,0,0,0.45)')
- }else{
-  document.documentElement.style.setProperty('--text-color','#fff')
-  document.documentElement.style.setProperty('--card-bg','rgba(255,255,255,0.04)')
-  document.documentElement.style.setProperty('--soft-bg','rgba(255,255,255,0.05)')
- }
-}
-
-/* neon */
-let neon=document.getElementById("neon")
-document.addEventListener("mousemove",(e)=>{
- neon.style.left=e.clientX+"px"
- neon.style.top=e.clientY+"px"
-})
-
-/* particles */
-let canvas=document.getElementById("particles")
-let ctx=canvas.getContext("2d")
-canvas.width=window.innerWidth
-canvas.height=window.innerHeight
-
-let particles=[]
-for(let i=0;i<80;i++){
- particles.push({
-  x:Math.random()*canvas.width,
-  y:Math.random()*canvas.height,
-  r:Math.random()*2,
-  dx:(Math.random()-0.5),
-  dy:(Math.random()-0.5)
- })
-}
-
-function draw(){
- ctx.clearRect(0,0,canvas.width,canvas.height)
- particles.forEach(p=>{
-  ctx.beginPath()
-  ctx.arc(p.x,p.y,p.r,0,Math.PI*2)
-  ctx.fillStyle="rgba(255,255,255,0.5)"
-  ctx.fill()
-  p.x+=p.dx
-  p.y+=p.dy
-  if(p.x<0||p.x>canvas.width)p.dx*=-1
-  if(p.y<0||p.y>canvas.height)p.dy*=-1
- })
- requestAnimationFrame(draw)
-}
-draw()
-
-window.onload=()=>{
- setTimeout(()=>{
-  document.getElementById("loading").style.opacity="0"
-  setTimeout(()=>{document.getElementById("loading").style.display="none"},500)
- },3000)
-}
+/* INICIAR */
+detectTheme()
 </script>
 
 </body>
