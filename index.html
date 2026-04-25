@@ -524,21 +524,26 @@ body{
 </div>  
 </div>  
 <div class="menu-btn" onclick="toggleMenu()">⋮</div> 
- <div class="menu" id="menu">  
-<div class="user-profile">
-  <img id="userImg" src="">
-  
-  <div>
-    <h4 id="userName">Carregando...</h4>
-    <span id="userStatus">● Online</span>
+<div class="menu" id="menu">
+
+  <div class="user-profile">
+    <img id="userImg" src="">
+    <div>
+      <h4 id="userName">Carregando...</h4>
+      <span id="userStatus">● Online</span>
+    </div>
+    <button class="edit-btn" onclick="editarPerfil()">⚙️</button>
   </div>
 
-  <button class="edit-btn" onclick="editarPerfil()">⚙️</button>
+  <button onclick="toggleMenu()">• ✖ •</button>
+
+  <h3>• Escolher Tema •</h3>
+  <div class="palette" id="palette"></div>
+
+  <h3>• Volume •</h3>
+  <input type="range" min="0" max="1" step="0.01" oninput="setVolume(this.value)">
+
 </div>
-  </div>
-</div>
-<button onclick="toggleMenu()">• ✖ •</button>  <h3>• Escolher Tema •</h3>  <div class="palette" id="palette"></div>  <h3>• Volume •</h3>  
-<input type="range" min="0" max="1" step="0.01" oninput="setVolume(this.value)">  
 </div>  <div class="container">  
 <div class="main">  <div style="display:flex;justify-content:space-between">  
 <div class="logo">• YORU SYSTEM •</div>  
@@ -763,7 +768,7 @@ function carregarPerfil(){
 }
 
 // criar perfil (só na primeira vez)
-function criarPerfil(){
+function criarPerfil(){+
  let nome = prompt("Digite seu nome:") || defaultUser.nome
  let foto = prompt("Link da sua foto:") || defaultUser.foto
 
