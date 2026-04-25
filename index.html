@@ -413,6 +413,36 @@ body{
  background:var(--main-color);
 }
  
+ .video-modal{
+ position:fixed;
+ inset:0;
+ background:rgba(0,0,0,0.8);
+ display:none;
+ justify-content:center;
+ align-items:center;
+ z-index:9999;
+}
+
+.video-box{
+ width:90%;
+ max-width:800px;
+ position:relative;
+}
+
+.video-box video{
+ width:100%;
+ border-radius:20px;
+}
+
+.close{
+ position:absolute;
+ top:-30px;
+ right:0;
+ color:#fff;
+ cursor:pointer;
+ font-size:20px;
+}
+ 
 </style> 
 </head>
 <body>
@@ -485,6 +515,19 @@ Canal
 </div>
 </footer>
 <button class="float-btn" onclick="window.open('https://wa.me/5584981625194')">💬</button>
+<button class="btn" onclick="abrirVideo()">
+Ver Uma Edit
+</button>
+<div id="videoModal" class="video-modal">
+  <div class="video-box">
+    <span onclick="fecharVideo()" class="close">✖</span>
+
+    <video controls autoplay id="videoPlayer">
+      <source src="https://raw.githubusercontent.com/dylanModz/uploads/main/midias/videos/853kdg7k2.mp4" type="video/mp4">
+    </video>
+
+  </div>
+</div>
 <script>  
 
 
@@ -625,6 +668,18 @@ window.addEventListener("load", () => {
   }, 800)
  }
 })
+  
+function abrirVideo(){
+ document.getElementById("videoModal").style.display = "flex"
+}
+
+function fecharVideo(){
+ document.getElementById("videoModal").style.display = "none"
+
+ const vid = document.getElementById("videoPlayer")
+ vid.pause()
+ vid.currentTime = 0
+}  
   
 </script> 
 </body>  
