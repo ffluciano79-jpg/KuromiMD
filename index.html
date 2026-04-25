@@ -332,26 +332,39 @@ window.onload=()=>{
  },2500)
 }
 
-/* VISUALIZER DE MÚSICA */
-let audioCtx = new (window.AudioContext || window.webkitAudioContext)()
-let analyser = audioCtx.createAnalyser()
-let source = audioCtx.createMediaElementSource(music)
+/* VISUALIZER FIXO */
+let audioCtx, analyser, source
 
-source.connect(analyser)
-analyser.connect(audioCtx.destination)
+function setupAudio(){
+ if(!audioCtx){
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)()
+  analyser = audioCtx.createAnalyser()
+  source = audioCtx.createMediaElementSource(music)
 
-analyser.fftSize = 128
-let bufferLength = analyser.frequencyBinCount
-let dataArray = new Uint8Array(bufferLength)
+  source.connect(analyser)
+  analyser.connect(audioCtx.destination)
+
+  analyser.fftSize = 128
+ }
+}
 
 let canvas = document.getElementById("visualizer")
 let ctx = canvas.getContext("2d")
 
-canvas.width = window.innerWidth
-canvas.height = window.innerHeight
+function resize(){
+ canvas.width = window.innerWidth
+ canvas.height = window.innerHeight
+}
+resize()
+window.addEventListener("resize",resize)
 
-function drawVisualizer(){
- requestAnimationFrame(drawVisualizer)
+let bufferLength = 64
+let dataArray = new Uint8Array(bufferLength)
+
+function draw(){
+ requestAnimationFrame(draw)
+
+ if(!analyser) return
 
  analyser.getByteFrequencyData(dataArray)
 
@@ -360,19 +373,23 @@ function drawVisualizer(){
  let barWidth = canvas.width / bufferLength
 
  for(let i=0;i<bufferLength;i++){
-  let barHeight = dataArray[i]
-
-  let x = i * barWidth
-  let y = canvas.height - barHeight
+  let h = dataArray[i] * 1.5
 
   ctx.fillStyle = getComputedStyle(document.documentElement)
    .getPropertyValue('--main-color')
 
-  ctx.fillRect(x,y,barWidth-2,barHeight)
+  ctx.fillRect(i*barWidth,canvas.height-h,barWidth-2,h)
  }
 }
 
-drawVisualizer()
+draw()
+
+/* ATIVA NO PLAY */
+function toggleMusic(){
+ setupAudio()
+ audioCtx.resume()
+ music.paused?music.play():music.pause()
+}
 
 /* GARANTE QUE TOQUE NO CELULAR */
 document.addEventListener("click",()=>{
