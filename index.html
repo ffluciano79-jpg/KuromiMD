@@ -13,34 +13,38 @@
 
 body{
   font-family:'Inter',sans-serif;
-  background:#050507;
+  background:#040406;
   color:#fff;
+  overflow-x:hidden;
 }
 
-/* BACKGROUND */
+/* FUNDO COM GLOW */
 body::before{
   content:"";
   position:fixed;
   width:100%;
   height:100%;
-  background:radial-gradient(circle at top,#111,#000);
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,77,136,0.15), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(255,77,136,0.1), transparent 40%);
   z-index:-1;
 }
 
 /* CONTAINER */
 .container{
-  max-width:900px;
+  max-width:850px;
   margin:80px auto;
   padding:20px;
 }
 
-/* CARD PRINCIPAL */
+/* CARD */
 .main{
-  background:rgba(255,255,255,0.03);
+  background:rgba(255,255,255,0.04);
+  backdrop-filter:blur(20px);
   border-radius:30px;
   padding:40px 25px;
-  box-shadow:0 0 60px rgba(255,77,136,0.08);
-  border:1px solid rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.06);
+  box-shadow:0 0 60px rgba(255,77,136,0.1);
   text-align:center;
 }
 
@@ -49,13 +53,13 @@ body::before{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:20px;
+  margin-bottom:25px;
 }
 
 .logo{
   font-family:'Orbitron';
   letter-spacing:2px;
-  font-size:20px;
+  color:#ff4d88;
 }
 
 .time{
@@ -65,47 +69,47 @@ body::before{
   font-size:13px;
 }
 
-/* STATUS BADGE */
+/* BADGE */
 .badge{
   display:inline-block;
-  padding:8px 20px;
+  padding:8px 18px;
   border-radius:30px;
   background:rgba(255,255,255,0.05);
-  margin:20px 0;
   font-size:13px;
+  margin-bottom:20px;
 }
 
 /* TITULO */
 h1{
-  font-size:2.3rem;
+  font-size:2.4rem;
   margin-bottom:15px;
 }
 
 p{
   opacity:0.6;
   font-size:14px;
-  line-height:1.6;
   max-width:500px;
   margin:auto;
+  line-height:1.6;
 }
 
-/* BOTÃO */
+/* BOTÃO PRINCIPAL */
 .btn{
   margin-top:30px;
   width:100%;
   padding:18px;
-  border-radius:20px;
+  border-radius:18px;
   border:none;
-  background:linear-gradient(45deg,#111,#1a1a1a);
+  background:linear-gradient(135deg,#ff4d88,#ff2a6d);
   color:#fff;
-  font-weight:500;
+  font-weight:600;
   cursor:pointer;
-  transition:.3s;
+  transition:.25s;
 }
 
 .btn:hover{
   transform:scale(1.03);
-  box-shadow:0 0 30px rgba(255,255,255,0.1);
+  box-shadow:0 0 25px rgba(255,77,136,0.6);
 }
 
 /* TAGS */
@@ -119,7 +123,7 @@ p{
 
 .tag{
   background:rgba(255,255,255,0.05);
-  padding:8px 15px;
+  padding:8px 14px;
   border-radius:20px;
   font-size:12px;
 }
@@ -133,12 +137,27 @@ p{
 }
 
 .small-btn{
-  padding:10px 15px;
+  padding:10px 14px;
   border-radius:20px;
   border:1px solid rgba(255,255,255,0.1);
   background:transparent;
   color:#fff;
   cursor:pointer;
+  transition:.2s;
+}
+
+.small-btn:hover{
+  background:rgba(255,255,255,0.1);
+}
+
+/* FOTO */
+.avatar{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  margin:20px auto;
+  box-shadow:0 0 30px rgba(255,77,136,0.5);
+  object-fit:cover;
 }
 </style>
 </head>
@@ -154,16 +173,17 @@ p{
   <div class="time" id="time"></div>
 </div>
 
-<div class="badge">Sistema online</div>
+<img class="avatar" src="https://i.ibb.co/6RCGNGD4/bf962842325b.jpg">
 
-<h1>Controle inteligente e performance estável.</h1>
+<div class="badge">Sistema ativo</div>
+
+<h1>Automação com presença e controle real.</h1>
 
 <p>
-Infraestrutura pensada para automação avançada, estabilidade contínua e respostas rápidas.
-Projetado para funcionar de forma eficiente sem comprometer a experiência.
+Projetado para grupos que precisam de estabilidade, resposta rápida e uma estrutura que funciona sem falhas.
 </p>
 
-<button class="btn" onclick="window.open('https://wa.me/558481625194')">
+<button class="btn" onclick="window.open('https://whatsapp.com/channel/0029Vb5wx3GId7nT87R9gn3L')">
 Canal Oficial
 </button>
 
@@ -176,6 +196,7 @@ Canal Oficial
 <div class="controls">
   <button class="small-btn" onclick="toggleMusic()">Música</button>
   <button class="small-btn" onclick="nextMusic()">Próxima</button>
+  <button class="small-btn" onclick="window.open('https://wa.me/558481625194')">Dono</button>
 </div>
 
 </div>
@@ -186,8 +207,8 @@ Canal Oficial
 <script>
 // relógio
 setInterval(()=>{
- let d = new Date()
- document.getElementById("time").innerText =
+ let d=new Date()
+ document.getElementById(\"time\").innerText=
  d.getHours()+\":\"+String(d.getMinutes()).padStart(2,'0')
 },1000)
 
