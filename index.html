@@ -243,18 +243,20 @@ let msgs=[
 
 let c=0
 let chat=document.getElementById("chat")
+
 function runChat(){
- if(c<msgs.length){
+ if(c < msgs.length){
   let d=document.createElement("div")
-  d.className="msg "+(c%2?"bot":"user")
+  d.className="msg " + (c%2 ? "bot" : "user")
   d.innerText=msgs[c]
   chat.appendChild(d)
-  chat.scrollTop=chat.scrollHeight
+  chat.scrollTop = chat.scrollHeight
   c++
-  setTimeout(runChat,1200)
+  setTimeout(runChat, 1200)
  }
 }
-runChat(){
+
+runChat()
  if(c<msgs.length){
   let d=document.createElement("div")
   d.className="msg "+(c%2?"bot":"user")
