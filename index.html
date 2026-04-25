@@ -1,26 +1,75 @@
-<!DOCTYPE html><html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yoru Bot</title><link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;500;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet"><style>
+<title>Yoru Bot</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
 *{margin:0;padding:0;box-sizing:border-box}
 
 body{
   font-family:'Quicksand',sans-serif;
   background:#05050a;
   color:#fff;
-  overflow-x:hidden;
+  overflow:hidden;
 }
 
-/* BACKGROUND ANIME SOFT */
+/* LOADING */
+#loader{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:#05050a;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+
+.loader-bar{
+  width:200px;
+  height:4px;
+  background:#111;
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:20px;
+}
+
+.loader-fill{
+  width:0%;
+  height:100%;
+  background:#ff4d88;
+  animation:load 2.5s forwards;
+}
+
+@keyframes load{
+  to{width:100%}
+}
+
+/* MAIN */
+#main{
+  display:none;
+  animation:fade 1s ease forwards;
+}
+
+@keyframes fade{
+  from{opacity:0; transform:scale(1.02)}
+  to{opacity:1; transform:scale(1)}
+}
+
+/* BACKGROUND */
 body::before{
   content:"";
   position:fixed;
   width:100%;
   height:100%;
   background:url('https://images.unsplash.com/photo-1534447677768-be436bb09401') center/cover;
-  opacity:0.18;
-  z-index:-2;
+  opacity:0.15;
+  z-index:-1;
 }
 
 /* NAV */
@@ -32,24 +81,10 @@ nav{
   padding:15px 40px;
   background:rgba(0,0,0,0.5);
   backdrop-filter:blur(15px);
-  z-index:100;
 }
 
 nav h1{
   font-family:'Orbitron';
-  letter-spacing:2px;
-  color:#ff4d88;
-}
-
-nav a{
-  color:#ddd;
-  margin-left:25px;
-  text-decoration:none;
-  font-size:14px;
-  transition:.3s;
-}
-
-nav a:hover{
   color:#ff4d88;
 }
 
@@ -67,12 +102,12 @@ nav a:hover{
   width:150px;
   border-radius:50%;
   box-shadow:0 0 40px rgba(255,77,136,0.6);
-  animation:float 4s ease-in-out infinite;
+  animation:float 4s infinite;
 }
 
 @keyframes float{
   0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-12px)}
+  50%{transform:translateY(-10px)}
 }
 
 .hero h2{
@@ -81,27 +116,33 @@ nav a:hover{
   margin-top:15px;
 }
 
-.hero p{
-  opacity:0.7;
-  margin:10px 0 25px;
+/* DOTS */
+.dots::after{
+  content:"";
+  animation:dots 1.5s infinite;
+}
+
+@keyframes dots{
+  0%{content:""}
+  33%{content:"."}
+  66%{content:".."}
+  100%{content:"..."}
 }
 
 /* BUTTONS */
 .controls{
+  margin-top:25px;
   display:flex;
   gap:12px;
-  flex-wrap:wrap;
-  justify-content:center;
 }
 
 .btn{
-  padding:10px 22px;
+  padding:10px 20px;
   border-radius:25px;
   border:1px solid rgba(255,77,136,0.5);
   background:rgba(255,77,136,0.1);
   color:#fff;
   cursor:pointer;
-  backdrop-filter:blur(8px);
   transition:.3s;
 }
 
@@ -109,22 +150,6 @@ nav a:hover{
   background:#ff4d88;
   box-shadow:0 0 20px rgba(255,77,136,0.6);
 }
-
-/* CHAT */
-.chat{
-  margin-top:30px;
-  width:300px;
-  background:rgba(0,0,0,0.5);
-  border-radius:15px;
-  padding:15px;
-  height:180px;
-  overflow:auto;
-  font-size:13px;
-}
-
-.msg{margin:6px 0}
-.bot{color:#ff9ecb}
-.user{text-align:right}
 
 /* SECTION */
 .section{
@@ -163,22 +188,39 @@ footer{
   padding:20px;
   opacity:0.5;
 }
-</style></head><body><nav>
-  <h1>Yoru</h1>
-  <div>
-    <a href="#">Início</a>
-    <a href="#funcoes">Funções</a>
-    <a href="#status">Status</a>
+</style>
+</head>
+
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <h2 style="font-family:Orbitron;color:#ff4d88">Yoru</h2>
+  <div class="loader-bar">
+    <div class="loader-fill"></div>
   </div>
-</nav><section class="hero">
+</div>
+
+<!-- MAIN -->
+<div id="main">
+
+<nav>
+  <h1>Yoru</h1>
+</nav>
+
+<section class="hero">
   <img src="https://i.ibb.co/6RCGNGD4/bf962842325b.jpg">
   <h2>Yoru Bot</h2>
-  <p id="typing"></p>  <div class="controls">
-    <button class="btn" onclick="toggleMusic()">Musicas</button>
+  <p class="dots">carregando sistema</p>
+
+  <div class="controls">
+    <button class="btn" onclick="toggleMusic()">Músicas</button>
     <button class="btn" onclick="nextMusic()">Próxima</button>
     <button class="btn" onclick="window.open('https://wa.me/558481625194')">Ver Dono</button>
-  </div>  <div class="chat" id="chat"></div>
-</section><section class="section" id="funcoes">
+  </div>
+</section>
+
+<section class="section">
   <h2>Recursos</h2>
   <div class="grid">
     <div class="card">Proteção completa de grupos</div>
@@ -188,14 +230,30 @@ footer{
     <div class="card">Controle avançado</div>
     <div class="card">Alta velocidade</div>
   </div>
-</section><section class="section" id="status">
+</section>
+
+<section class="section">
   <h2>Status</h2>
   <div class="status" id="statusText"></div>
-</section><footer>
+</section>
+
+<footer>
   Yoru System
-</footer><audio id="music"></audio>
+</footer>
+
+</div>
+
+<audio id="music"></audio>
 
 <script>
+// LOADER
+setTimeout(()=>{
+  document.getElementById("loader").style.display="none"
+  document.getElementById("main").style.display="block"
+  document.body.style.overflow="auto"
+},2500)
+
+// MUSIC
 let playlist = [
 "https://raw.githubusercontent.com/dylanModz/uploads/main/midias/audios/527eu4coi.mp3",
 "https://raw.githubusercontent.com/dylanModz/uploads/main/midias/audios/track2.mp3"
@@ -217,56 +275,11 @@ function nextMusic(){
 
 music.addEventListener("ended", nextMusic)
 
+// STATUS
 setInterval(()=>{
   document.getElementById("statusText").innerText = "online • " + (99+Math.random()).toFixed(2)+"%"
 },2000)
+</script>
 
-// typing
-let txt="automação elegante e poderosa"
-let i=0
-function type(){
- if(i<txt.length){
-  document.getElementById("typing").innerHTML+=txt[i]
-  i++
-  setTimeout(type,40)
- }
-}
-type()
-
-// chat
-let msgs=[
-"sobre o bot",
-"A Yoru foi criada pra facilitar a vida em grupos, trazendo organização, proteção e também momentos leves de interação.",
-"Ela aprende com o uso e se adapta ao estilo do grupo, mantendo tudo equilibrado sem exageros.",
-"Seu foco é ser útil sem incomodar, rápida sem complicar e presente quando realmente precisa."
-]
-
-let c=0
-let chat=document.getElementById("chat")
-
-function runChat(){
- if(c < msgs.length){
-  let d=document.createElement("div")
-  d.className="msg " + (c%2 ? "bot" : "user")
-  d.innerText=msgs[c]
-  chat.appendChild(d)
-  chat.scrollTop = chat.scrollHeight
-  c++
-  setTimeout(runChat, 1200)
- }
-}
-
-runChat()
- if(c<msgs.length){
-  let d=document.createElement("div")
-  d.className="msg "+(c%2?"bot":"user")
-  d.innerText=msgs[c]
-  chat.appendChild(d)
-  chat.scrollTop=chat.scrollHeight
-  c++
-  setTimeout(runChat,1200)
- }
-}
-runChat()
-</script></body>
+</body>
 </html>
