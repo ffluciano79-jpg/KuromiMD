@@ -174,9 +174,9 @@ footer{
   <img src="https://i.ibb.co/6RCGNGD4/bf962842325b.jpg">
   <h2>Yoru Bot</h2>
   <p id="typing"></p>  <div class="controls">
-    <button class="btn" onclick="toggleMusic()">Play</button>
-    <button class="btn" onclick="nextMusic()">Next</button>
-    <button class="btn" onclick="window.open('https://wa.me/558481625194')">Entrar</button>
+    <button class="btn" onclick="toggleMusic()">Musicas</button>
+    <button class="btn" onclick="nextMusic()">Próxima</button>
+    <button class="btn" onclick="window.open('https://wa.me/558481625194')">Ver Dono</button>
   </div>  <div class="chat" id="chat"></div>
 </section><section class="section" id="funcoes">
   <h2>Recursos</h2>
@@ -198,7 +198,7 @@ footer{
 <script>
 let playlist = [
 "https://raw.githubusercontent.com/dylanModz/uploads/main/midias/audios/527eu4coi.mp3",
-"https://raw.githubusercontent.com/dylanModz/uploads/main/midias/audios/7713x1kpz.mp3"
+"https://raw.githubusercontent.com/dylanModz/uploads/main/midias/audios/track2.mp3"
 ]
 
 let index = 0
@@ -234,10 +234,27 @@ function type(){
 type()
 
 // chat
-let msgs=["menu","carregando","casal","resultado pronto","play música"]
+let msgs=[
+"sobre o bot",
+"A Yoru foi criada pra facilitar a vida em grupos, trazendo organização, proteção e também momentos leves de interação.",
+"Ela aprende com o uso e se adapta ao estilo do grupo, mantendo tudo equilibrado sem exageros.",
+"Seu foco é ser útil sem incomodar, rápida sem complicar e presente quando realmente precisa."
+]
+
 let c=0
 let chat=document.getElementById("chat")
 function runChat(){
+ if(c<msgs.length){
+  let d=document.createElement("div")
+  d.className="msg "+(c%2?"bot":"user")
+  d.innerText=msgs[c]
+  chat.appendChild(d)
+  chat.scrollTop=chat.scrollHeight
+  c++
+  setTimeout(runChat,1200)
+ }
+}
+runChat(){
  if(c<msgs.length){
   let d=document.createElement("div")
   d.className="msg "+(c%2?"bot":"user")
