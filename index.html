@@ -16,14 +16,14 @@ body{
  background:#040406;
  color:#fff;
  overflow-x:hidden;
+ transition:.3s;
 }
 
 /* LOADING */
 #loading{
  position:fixed;inset:0;background:#040406;
  display:flex;align-items:center;justify-content:center;
- z-index:9999;
- transition:.5s;
+ z-index:9999;transition:.5s;
 }
 .loader-box{
  width:90%;max-width:320px;padding:30px 20px;
@@ -43,7 +43,6 @@ body{
  position:fixed;top:20px;right:20px;
  background:#111;padding:10px 14px;border-radius:12px;
  cursor:pointer;z-index:10;
- box-shadow:0 0 10px rgba(0,0,0,0.5);
 }
 .menu{
  position:fixed;top:0;right:-270px;width:270px;height:100%;
@@ -51,8 +50,6 @@ body{
  display:flex;flex-direction:column;gap:15px;z-index:10;
 }
 .menu.active{right:0;}
-
-.menu h3{font-size:14px;opacity:.7}
 
 .menu-slider{
  width:100%;appearance:none;height:6px;
@@ -89,7 +86,11 @@ canvas{position:fixed;inset:0;z-index:0;}
  color:var(--main-color);
  text-shadow:0 0 10px var(--main-color);
 }
-.time{background:rgba(255,255,255,0.05);padding:8px 14px;border-radius:20px;}
+
+.time{
+ background:rgba(255,255,255,0.05);
+ padding:8px 14px;border-radius:20px;
+}
 
 .avatar{
  width:100px;height:100px;border-radius:50%;
@@ -101,10 +102,17 @@ canvas{position:fixed;inset:0;z-index:0;}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
 .btn{
- margin-top:25px;width:100%;padding:18px;
+ margin-top:20px;width:100%;padding:18px;
  border-radius:18px;border:none;
- background:var(--main-color);color:#fff;
+ background:var(--main-color);
+ color:#fff;
+ font-weight:500;
  cursor:pointer;
+ transition:.2s;
+}
+
+.btn:hover{
+ filter:brightness(1.2);
 }
 </style>
 </head>
@@ -114,10 +122,10 @@ canvas{position:fixed;inset:0;z-index:0;}
 <div id="loading">
  <div class="loader-box">
   <div class="loader-img">
-   <img src="https://i.ibb.co/Rp52gZxf/4a673d55961f.jpg">
+   <img src="https://i.ibb.co/6RCGNGD4/bf962842325b.jpg">
   </div>
   <h2>YORU SYSTEM</h2>
-  <p>• Lucianz •</p>
+  <p>By Lucianz</p>
   <div class="loader-bar"><div class="loader-progress"></div></div>
  </div>
 </div>
@@ -132,9 +140,6 @@ canvas{position:fixed;inset:0;z-index:0;}
 
 <h3>Volume</h3>
 <input type="range" min="0" max="1" step="0.01" class="menu-slider" oninput="setVolume(this.value)">
-
-<h3>Progresso</h3>
-<input type="range" min="0" max="100" class="menu-slider" id="seekbar" oninput="seekMenu(this.value)">
 </div>
 
 <canvas id="particles"></canvas>
@@ -158,7 +163,7 @@ canvas{position:fixed;inset:0;z-index:0;}
 Canal Oficial
 </button>
 
-<button class="btn" onclick="window.open('https://wa.me/5584981625194')">
+<button class="btn" onclick="window.open('https://wa.me/5599999999999')">
 Falar com o Dono
 </button>
 
@@ -174,33 +179,20 @@ setInterval(()=>{
  d.getHours()+":"+String(d.getMinutes()).padStart(2,'0')
 },1000)
 
-let playlist=[
-"https://raw.githubusercontent.com/dylanModz/uploads/main/midias/audios/527eu4coi.mp3",
-"https://raw.githubusercontent.com/dylanModz/uploads/main/midias/audios/7713x1kpz.mp3"
-]
-
-let i=0
 let music=document.getElementById("music")
-music.src=playlist[i]
+music.src="https://raw.githubusercontent.com/dylanModz/uploads/main/midias/audios/527eu4coi.mp3"
 
 function toggleMusic(){music.paused?music.play():music.pause()}
-
 function setVolume(v){music.volume=v}
-
-function seekMenu(v){
- if(music.duration){
-  music.currentTime=(v/100)*music.duration
- }
-}
 
 function toggleMenu(){
  document.getElementById("menu").classList.toggle("active")
 }
 
+/* COR INTELIGENTE */
 function setColor(c){
  document.documentElement.style.setProperty('--main-color',c)
 
- // detectar se cor é clara ou escura
  let r=parseInt(c.substr(1,2),16)
  let g=parseInt(c.substr(3,2),16)
  let b=parseInt(c.substr(5,2),16)
