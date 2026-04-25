@@ -2,23 +2,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yoru Bot Final</title><link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet"><style>
+<title>Yoru Bot</title><link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;500;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet"><style>
 *{margin:0;padding:0;box-sizing:border-box}
 
 body{
-  font-family:'Poppins',sans-serif;
-  background:#040409;
+  font-family:'Quicksand',sans-serif;
+  background:#05050a;
   color:#fff;
   overflow-x:hidden;
 }
 
+/* BACKGROUND ANIME SOFT */
 body::before{
   content:"";
   position:fixed;
   width:100%;
   height:100%;
-  background:url('https://images.unsplash.com/photo-1519681393784-d120267933ba') center/cover;
-  opacity:0.2;
+  background:url('https://images.unsplash.com/photo-1534447677768-be436bb09401') center/cover;
+  opacity:0.18;
   z-index:-2;
 }
 
@@ -28,37 +29,31 @@ nav{
   width:100%;
   display:flex;
   justify-content:space-between;
-  padding:15px 30px;
-  background:rgba(0,0,0,0.6);
-  backdrop-filter:blur(12px);
-  z-index:10;
+  padding:15px 40px;
+  background:rgba(0,0,0,0.5);
+  backdrop-filter:blur(15px);
+  z-index:100;
 }
 
 nav h1{
-  color:#ff0055;
   font-family:'Orbitron';
+  letter-spacing:2px;
+  color:#ff4d88;
 }
 
 nav a{
-  color:#fff;
-  margin-left:20px;
+  color:#ddd;
+  margin-left:25px;
   text-decoration:none;
-  position:relative;
-}
-
-nav a::after{
-  content:"";
-  position:absolute;
-  width:0;
-  height:2px;
-  background:#ff0055;
-  left:0;
-  bottom:-4px;
+  font-size:14px;
   transition:.3s;
 }
 
-nav a:hover::after{width:100%}
+nav a:hover{
+  color:#ff4d88;
+}
 
+/* HERO */
 .hero{
   height:100vh;
   display:flex;
@@ -69,10 +64,10 @@ nav a:hover::after{width:100%}
 }
 
 .hero img{
-  width:140px;
+  width:150px;
   border-radius:50%;
-  box-shadow:0 0 40px #ff0055;
-  animation:float 3s infinite;
+  box-shadow:0 0 40px rgba(255,77,136,0.6);
+  animation:float 4s ease-in-out infinite;
 }
 
 @keyframes float{
@@ -83,43 +78,55 @@ nav a:hover::after{width:100%}
 .hero h2{
   font-size:3rem;
   font-family:'Orbitron';
+  margin-top:15px;
+}
+
+.hero p{
+  opacity:0.7;
+  margin:10px 0 25px;
+}
+
+/* BUTTONS */
+.controls{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  justify-content:center;
 }
 
 .btn{
-  padding:12px 25px;
-  border-radius:30px;
-  border:none;
-  background:linear-gradient(45deg,#ff0055,#ff3c8d);
+  padding:10px 22px;
+  border-radius:25px;
+  border:1px solid rgba(255,77,136,0.5);
+  background:rgba(255,77,136,0.1);
   color:#fff;
   cursor:pointer;
-  margin:8px;
+  backdrop-filter:blur(8px);
+  transition:.3s;
 }
 
 .btn:hover{
-  transform:scale(1.1);
-  box-shadow:0 0 25px #ff0055;
+  background:#ff4d88;
+  box-shadow:0 0 20px rgba(255,77,136,0.6);
 }
 
-.btn-secondary{
-  background:#111;
-  border:1px solid #ff0055;
-}
-
-.chat-box{
+/* CHAT */
+.chat{
   margin-top:30px;
-  background:rgba(0,0,0,0.6);
-  padding:15px;
+  width:300px;
+  background:rgba(0,0,0,0.5);
   border-radius:15px;
-  width:280px;
-  height:160px;
+  padding:15px;
+  height:180px;
   overflow:auto;
   font-size:13px;
 }
 
-.msg{margin:5px 0}
-.bot{color:#00ffc8}
+.msg{margin:6px 0}
+.bot{color:#ff9ecb}
 .user{text-align:right}
 
+/* SECTION */
 .section{
   padding:80px 20px;
   text-align:center;
@@ -134,34 +141,27 @@ nav a:hover::after{width:100%}
 }
 
 .card{
-  background:rgba(255,255,255,0.05);
+  background:rgba(255,255,255,0.04);
   padding:25px;
-  border-radius:15px;
-  border:1px solid rgba(255,0,100,0.2);
+  border-radius:18px;
+  border:1px solid rgba(255,77,136,0.2);
   transition:.3s;
 }
 
 .card:hover{
-  transform:translateY(-10px) scale(1.05);
-  box-shadow:0 0 30px rgba(255,0,100,0.4);
+  transform:translateY(-10px);
+  box-shadow:0 0 25px rgba(255,77,136,0.4);
 }
 
 .status{
-  font-size:1.5rem;
-  color:#00ff88;
-  animation:pulse 1.2s infinite;
-}
-
-@keyframes pulse{
-  0%{opacity:1}
-  50%{opacity:.4}
-  100%{opacity:1}
+  font-size:1.4rem;
+  color:#8affc1;
 }
 
 footer{
   text-align:center;
   padding:20px;
-  opacity:0.6;
+  opacity:0.5;
 }
 </style></head><body><nav>
   <h1>Yoru</h1>
@@ -173,36 +173,32 @@ footer{
 </nav><section class="hero">
   <img src="https://i.ibb.co/6RCGNGD4/bf962842325b.jpg">
   <h2>Yoru Bot</h2>
-  <p id="typing"></p>  <div>
-    <button class="btn" onclick="toggleMusic()">🎵 Play / Pause</button>
-    <button class="btn btn-secondary" onclick="nextMusic()">⏭ Próxima Música</button>
-    <button class="btn" onclick="window.open('https://wa.me/558481625194')">📱 Usar Bot</button>
-  </div>  <div class="chat-box" id="chat"></div>
+  <p id="typing"></p>  <div class="controls">
+    <button class="btn" onclick="toggleMusic()">Play</button>
+    <button class="btn" onclick="nextMusic()">Next</button>
+    <button class="btn" onclick="window.open('https://wa.me/558481625194')">Entrar</button>
+  </div>  <div class="chat" id="chat"></div>
 </section><section class="section" id="funcoes">
-  <h2>⚡ Funções da Yoru</h2>
+  <h2>Recursos</h2>
   <div class="grid">
-    <div class="card">🛡️ Anti-link automático</div>
-    <div class="card">🚫 Anti mídia total</div>
-    <div class="card">🤖 Anti-bot inteligente</div>
-    <div class="card">📊 Sistema de registro</div>
-    <div class="card">🎮 Diversão interativa</div>
-    <div class="card">📥 Downloads rápidos</div>
-    <div class="card">⚙️ Sistema avançado</div>
-    <div class="card">🚀 Alta performance</div>
+    <div class="card">Proteção completa de grupos</div>
+    <div class="card">Sistema inteligente automático</div>
+    <div class="card">Diversão e interação</div>
+    <div class="card">Downloads integrados</div>
+    <div class="card">Controle avançado</div>
+    <div class="card">Alta velocidade</div>
   </div>
 </section><section class="section" id="status">
-  <h2>📊 Status</h2>
-  <div class="status" id="statusText">Conectando...</div>
+  <h2>Status</h2>
+  <div class="status" id="statusText"></div>
 </section><footer>
-  © 2026 - Yoru Bot Final
+  Yoru System
 </footer><audio id="music"></audio>
 
 <script>
-// PLAYLIST
 let playlist = [
 "https://raw.githubusercontent.com/dylanModz/uploads/main/midias/audios/527eu4coi.mp3",
-"https://raw.githubusercontent.com/dylanModz/uploads/main/midias/audios/track2.mp3",
-"https://raw.githubusercontent.com/dylanModz/uploads/main/midias/audios/track3.mp3"
+"https://raw.githubusercontent.com/dylanModz/uploads/main/midias/audios/7713x1kpz.mp3"
 ]
 
 let index = 0
@@ -214,56 +210,44 @@ function toggleMusic(){
 }
 
 function nextMusic(){
-  index = (index + 1) % playlist.length
+  index = (index+1)%playlist.length
   music.src = playlist[index]
   music.play()
 }
 
-// AUTO NEXT
 music.addEventListener("ended", nextMusic)
 
-// STATUS
 setInterval(()=>{
-  let uptime = (99 + Math.random()).toFixed(2)
-  document.getElementById("statusText").innerText = "Online ✅ • " + uptime + "% uptime"
+  document.getElementById("statusText").innerText = "online • " + (99+Math.random()).toFixed(2)+"%"
 },2000)
 
-// TYPING
-let text = "Automação poderosa • Proteção • Diversão"
-let i = 0
-function typing(){
-  if(i < text.length){
-    document.getElementById("typing").innerHTML += text.charAt(i)
-    i++
-    setTimeout(typing,35)
-  }
+// typing
+let txt="automação elegante e poderosa"
+let i=0
+function type(){
+ if(i<txt.length){
+  document.getElementById("typing").innerHTML+=txt[i]
+  i++
+  setTimeout(type,40)
+ }
 }
-typing()
+type()
 
-// CHAT
-let chat = document.getElementById("chat")
-let msgs = [
-"&menu",
-"Carregando comandos...",
-"&casal",
-"💘 Casal: @user1 + @user2",
-"&play música",
-"🎶 Baixando música...",
-"Download completo ✅"
-]
-
-let c = 0
-function fakeChat(){
-  if(c < msgs.length){
-    let div = document.createElement("div")
-    div.className = "msg " + (c%2==0 ? "user" : "bot")
-    div.innerText = msgs[c]
-    chat.appendChild(div)
-    chat.scrollTop = chat.scrollHeight
-    c++
-    setTimeout(fakeChat,1000)
-  }
+// chat
+let msgs=["menu","carregando","casal","resultado pronto","play música"]
+let c=0
+let chat=document.getElementById("chat")
+function runChat(){
+ if(c<msgs.length){
+  let d=document.createElement("div")
+  d.className="msg "+(c%2?"bot":"user")
+  d.innerText=msgs[c]
+  chat.appendChild(d)
+  chat.scrollTop=chat.scrollHeight
+  c++
+  setTimeout(runChat,1200)
+ }
 }
-fakeChat()
+runChat()
 </script></body>
 </html>
