@@ -442,6 +442,34 @@ body{
  cursor:pointer;
  font-size:20px;
 }
+
+.user-profile{
+ display:flex;
+ align-items:center;
+ gap:12px;
+ padding:15px;
+ border-radius:20px;
+ background:rgba(255,255,255,0.05);
+ backdrop-filter:blur(20px);
+ margin-bottom:15px;
+}
+
+.user-profile img{
+ width:50px;
+ height:50px;
+ border-radius:50%;
+ object-fit:cover;
+ box-shadow:0 0 10px var(--main-color);
+}
+
+.user-profile h4{
+ font-size:15px;
+}
+
+.user-profile span{
+ font-size:12px;
+ opacity:0.6;
+}
  
 </style> 
 </head>
@@ -475,7 +503,15 @@ body{
 </div>  
 </div>  
 </div>  
-<div class="menu-btn" onclick="toggleMenu()">⋮</div>  <div class="menu" id="menu">  
+<div class="menu-btn" onclick="toggleMenu()">⋮</div> 
+<div class="user-profile">
+<img src="https://i.ibb.co/6RCGNGD4/bf962842325b.jpg" id="userImg">
+<div>
+<h4 id="userName">Usuário</h4>
+<span id="userStatus">Online</span>
+</div>
+</div>
+ <div class="menu" id="menu">  
 <button onclick="toggleMenu()">• ✖ •</button>  <h3>• Escolher Tema •</h3>  <div class="palette" id="palette"></div>  <h3>• Volume •</h3>  
 <input type="range" min="0" max="1" step="0.01" oninput="setVolume(this.value)">  
 </div>  <div class="container">  
@@ -681,6 +717,24 @@ function fecharVideo(){
  vid.pause()
  vid.currentTime = 0
 }  
+
+let nome = localStorage.getItem("user_nome")
+
+if(!nome){
+ nome = prompt("Digite seu nome:")
+ localStorage.setItem("user_nome", nome)
+}
+
+document.getElementById("userName").innerText = nome
+
+let foto = localStorage.getItem("user_foto")
+
+if(!foto){
+ foto = prompt("Cole o link da sua foto:")
+ localStorage.setItem("user_foto", foto)
+}
+
+document.getElementById("userImg").src = foto
   
 </script> 
 </body>  
