@@ -487,7 +487,18 @@ body{
 • Canal Oficial •
 </button>  <button class="btn" onclick="window.open('https://wa.me/558597392253')">  
 • Falar Com A Bot •
-</button>  </div>  
+</button> 
+<div id="videoModal" class="video-modal">
+  <div class="video-box">
+    <span onclick="fecharVideo()" class="close">✖</span>
+
+    <video controls autoplay id="videoPlayer">
+      <source src="https://raw.githubusercontent.com/dylanModz/uploads/main/midias/videos/853kdg7k2.mp4" type="video/mp4">
+    </video>
+
+  </div>
+</div>
+</div>  
 </div>  <audio id="music"></audio>
 <footer class="footer">
 <div class="footer-box">
@@ -518,17 +529,10 @@ Canal
 <button class="btn" onclick="abrirVideo()">
 Ver Uma Edit
 </button>
-<div id="videoModal" class="video-modal">
-  <div class="video-box">
-    <span onclick="fecharVideo()" class="close">✖</span>
 
-    <video controls autoplay id="videoPlayer">
-      <source src="https://raw.githubusercontent.com/dylanModz/uploads/main/midias/videos/098xwvxdh.mp4" type="video/mp4">
-    </video>
-
-  </div>
-</div>
 <script>  
+
+
 
 
 /* TEMA DO SISTEMA */  
