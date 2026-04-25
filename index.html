@@ -16,14 +16,12 @@ body {
   background: linear-gradient(135deg, #0f0f0f, #1a1a2e);
   color: white;
   font-family: Arial, sans-serif;
+  text-align: center;
 }
 
 /* HEADER */
 header {
-  padding: 20px;
-  text-align: center;
-  background: rgba(0,0,0,0.5);
-  backdrop-filter: blur(10px);
+  padding: 25px;
 }
 
 header h1 {
@@ -37,9 +35,9 @@ header p {
 
 /* CONTAINER */
 .container {
-  padding: 20px;
   max-width: 900px;
   margin: auto;
+  padding: 15px;
 }
 
 /* CARD */
@@ -48,7 +46,7 @@ header p {
   padding: 20px;
   border-radius: 15px;
   margin-top: 20px;
-  box-shadow: 0 0 20px rgba(255,0,100,0.2);
+  box-shadow: 0 0 15px rgba(255,0,100,0.2);
   transition: 0.3s;
 }
 
@@ -56,37 +54,7 @@ header p {
   transform: scale(1.02);
 }
 
-/* TITULOS */
-.card h2 {
-  margin-bottom: 10px;
-  color: #ff0055;
-}
-
-/* LISTA */
-ul {
-  list-style: none;
-}
-
-li {
-  padding: 5px 0;
-  border-bottom: 1px solid #222;
-}
-
-/* STATUS */
-.status {
-  display: flex;
-  justify-content: space-between;
-}
-
-.online {
-  color: #00ff88;
-}
-
-.offline {
-  color: red;
-}
-
-/* BOTÃO */
+/* BOTÕES */
 button {
   background: #ff0055;
   border: none;
@@ -95,16 +63,43 @@ button {
   border-radius: 10px;
   cursor: pointer;
   margin-top: 10px;
+  transition: 0.3s;
 }
 
 button:hover {
   background: #ff3366;
 }
 
+/* STATUS */
+.status {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* JOGO */
+#gameBox {
+  margin-top: 15px;
+}
+
+#target {
+  width: 60px;
+  height: 60px;
+  background: #ff0055;
+  border-radius: 50%;
+  position: relative;
+  margin: 20px auto;
+  cursor: pointer;
+  display: none;
+}
+
+.score {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
 /* FOOTER */
 footer {
-  text-align: center;
-  padding: 20px;
+  margin-top: 20px;
   opacity: 0.5;
 }
 </style>
@@ -128,13 +123,11 @@ footer {
   <!-- COMANDOS -->
   <div class="card">
     <h2>⚙️ Comandos</h2>
-    <ul>
-      <li>🩸 &menu</li>
-      <li>😂 &casal</li>
-      <li>🎵 &play</li>
-      <li>🕷 &dono</li>
-      <li>🤖 &yoru</li>
-    </ul>
+    <p>🩸 &menu</p>
+    <p>😂 &casal</p>
+    <p>🎵 &play</p>
+    <p>🕷 &dono</p>
+    <p>🤖 &yoru</p>
   </div>
 
   <!-- STATUS -->
@@ -142,7 +135,7 @@ footer {
     <h2>📊 Status</h2>
     <div class="status">
       <span>Bot:</span>
-      <span class="online">Online ✅</span>
+      <span style="color:#00ff88;">Online ✅</span>
     </div>
     <div class="status">
       <span>Versão:</span>
@@ -150,12 +143,22 @@ footer {
     </div>
   </div>
 
-  <!-- BOTÃO -->
+  <!-- INTERAÇÃO -->
   <div class="card">
     <h2>🚀 Interação</h2>
-    <button onclick="alert('Bem-vindo ao Yoru Bot!')">
-      Clique aqui
-    </button>
+    <button onclick="mensagem()">Mensagem</button>
+    <button onclick="mudarCor()">Mudar cor</button>
+  </div>
+
+  <!-- JOGO -->
+  <div class="card">
+    <h2>🎮 Mini Jogo (Clique rápido)</h2>
+    <button onclick="startGame()">Iniciar Jogo</button>
+
+    <div id="gameBox">
+      <div id="target"></div>
+      <div class="score">Pontuação: <span id="score">0</span></div>
+    </div>
   </div>
 
 </div>
@@ -164,5 +167,48 @@ footer {
   <p>© 2026 - Criado por Lucianz</p>
 </footer>
 
+<script>
+let score = 0
+let gameActive = false
+
+function mensagem() {
+  alert("🔥 Bem-vindo ao Yoru Bot!")
+}
+
+function mudarCor() {
+  document.body.style.background =
+    "linear-gradient(135deg, #" + Math.floor(Math.random()*999999) + ", #000)"
+}
+
+/* JOGO */
+function startGame() {
+  score = 0
+  gameActive = true
+  document.getElementById("score").innerText = score
+  document.getElementById("target").style.display = "block"
+  moverAlvo()
+}
+
+function moverAlvo() {
+  if (!gameActive) return
+
+  const target = document.getElementById("target")
+
+  let x = Math.random() * 250
+  let y = Math.random() * 250
+
+  target.style.transform = `translate(${x}px, ${y}px)`
+
+  setTimeout(moverAlvo, 800)
+}
+
+document.getElementById("target").onclick = () => {
+  if (!gameActive) return
+
+  score++
+  document.getElementById("score").innerText = score
+}
+</script>
+
 </body>
-</html>>
+</html>
