@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yoru Bot</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, #0f0f0f, #1a1a2e);
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+header {
+  padding: 20px;
+  text-align: center;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(10px);
+}
+
+header h1 {
+  font-size: 2.5rem;
+  color: #ff0055;
+}
+
+header p {
+  opacity: 0.7;
+}
+
+/* CONTAINER */
+.container {
+  padding: 20px;
+  max-width: 900px;
+  margin: auto;
+}
+
+/* CARD */
+.card {
+  background: #111;
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 20px;
+  box-shadow: 0 0 20px rgba(255,0,100,0.2);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+/* TITULOS */
+.card h2 {
+  margin-bottom: 10px;
+  color: #ff0055;
+}
+
+/* LISTA */
+ul {
+  list-style: none;
+}
+
+li {
+  padding: 5px 0;
+  border-bottom: 1px solid #222;
+}
+
+/* STATUS */
+.status {
+  display: flex;
+  justify-content: space-between;
+}
+
+.online {
+  color: #00ff88;
+}
+
+.offline {
+  color: red;
+}
+
+/* BOTÃO */
+button {
+  background: #ff0055;
+  border: none;
+  padding: 10px 15px;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background: #ff3366;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  opacity: 0.5;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🤖 Yoru Bot</h1>
+  <p>Um bot feito por um cara entediado.</p>
+</header>
+
+<div class="container">
+
+  <!-- SOBRE -->
+  <div class="card">
+    <h2>📌 Sobre</h2>
+    <p>Bot criado para diversão, moderação e utilidades.</p>
+  </div>
+
+  <!-- COMANDOS -->
+  <div class="card">
+    <h2>⚙️ Comandos</h2>
+    <ul>
+      <li>🩸 &menu</li>
+      <li>😂 &casal</li>
+      <li>🎵 &play</li>
+      <li>🕷 &dono</li>
+      <li>🤖 &yoru</li>
+    </ul>
+  </div>
+
+  <!-- STATUS -->
+  <div class="card">
+    <h2>📊 Status</h2>
+    <div class="status">
+      <span>Bot:</span>
+      <span class="online">Online ✅</span>
+    </div>
+    <div class="status">
+      <span>Versão:</span>
+      <span>1.6.0</span>
+    </div>
+  </div>
+
+  <!-- BOTÃO -->
+  <div class="card">
+    <h2>🚀 Interação</h2>
+    <button onclick="alert('Bem-vindo ao Yoru Bot!')">
+      Clique aqui
+    </button>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 - Criado por Lucianz</p>
+</footer>
+
+</body>
+</html>>
