@@ -472,24 +472,6 @@ body{
  opacity:0.6;
 }
 
-
-.edit-btn{
- margin-left:auto;
- border:none;
- background:transparent;
- color:#fff;
- cursor:pointer;
- font-size:16px;
-}
-
-.vip{
- font-size:10px;
- background:gold;
- color:#000;
- padding:2px 6px;
- border-radius:10px;
- margin-left:5px;
-}
  
 </style> 
 </head>
@@ -531,9 +513,7 @@ body{
     <h4 id="userName">Carregando...</h4>
     <span id="userStatus">● Online</span>
   <button class="edit-btn" onclick="editarPerfil()">⚙️</button>
-  
-</div>
-</div>
+  </div>
 </div>
 <button onclick="toggleMenu()">• ✖ •</button>  <h3>• Escolher Tema •</h3>  <div class="palette" id="palette"></div>  <h3>• Volume •</h3>  
 <input type="range" min="0" max="1" step="0.01" oninput="setVolume(this.value)">  
@@ -760,58 +740,6 @@ if(!nome){
 
 document.getElementById("userName").innerText = nome
 
-
-// carregar ou criar perfil
-function carregarPerfil(){
- let user = JSON.parse(localStorage.getItem("yoru_user"))
-
- if(!user){
-  user = criarPerfil()
- }
-
- aplicarPerfil(user)
-}
-
-// criar perfil
-function criarPerfil(){
- let nome = prompt("Digite seu nome:")
- let foto = prompt("Cole o link da sua foto:")
-
- let user = {
-  nome: nome || "Usuário",
-  foto: foto || "https://i.ibb.co/6RCGNGD4/bf962842325b.jpg",
-  vip: Math.random() > 0.7 // chance de ser VIP fake 😈
- }
-
- localStorage.setItem("yoru_user", JSON.stringify(user))
- return user
-}
-
-// aplicar no site
-function aplicarPerfil(user){
- let nomeEl = document.getElementById("userName")
-
- nomeEl.innerHTML = user.nome + (user.vip ? ' <span class="vip">VIP</span>' : '')
-
- document.getElementById("userImg").src = user.foto
-}
-
-// editar perfil
-function editarPerfil(){
- let user = JSON.parse(localStorage.getItem("yoru_user"))
-
- let novoNome = prompt("Novo nome:", user.nome)
- let novaFoto = prompt("Nova foto (link):", user.foto)
-
- user.nome = novoNome || user.nome
- user.foto = novaFoto || user.foto
-
- localStorage.setItem("yoru_user", JSON.stringify(user))
- aplicarPerfil(user)
-}
-
-// iniciar
-carregarPerfil()
   
 </script> 
 </body>  
