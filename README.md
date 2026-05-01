@@ -1,1 +1,1 @@
-# BotLcn-Yoru
+Kuromi Md bot feita por Lucianz Md
